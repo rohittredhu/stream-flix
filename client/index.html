@@ -1,1 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamFlix - Video Streaming Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-play-circle"></i>
+                    <h1>StreamFlix</h1>
+                </div>
+                <nav class="nav">
+                    <a href="#" class="nav-link active">Home</a>
+                    <a href="#" class="nav-link">Trending</a>
+                    <a href="#" class="nav-link">Library</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="icon-button" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="icon-button" id="uploadBtn">
+                        <i class="fas fa-upload"></i>
+                    </button>
+                    <div class="user-menu" id="userMenu">
+                        <button class="user-profile" id="userProfileBtn">
+                            <div class="avatar" id="userAvatar"></div>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="user-dropdown-header">
+                                <div class="user-info">
+                                    <p class="user-name" id="userName">Loading...</p>
+                                    <p class="user-email" id="userEmail">Loading...</p>
+                                </div>
+                            </div>
+                            <div class="user-dropdown-body">
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-user"></i>
+                                    <span>My Profile</span>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-video"></i>
+                                    <span>My Videos</span>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Liked Videos</span>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Settings</span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item" id="logoutBtn">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Search videos, creators..." id="searchInput">
+                <button class="close-search" id="closeSearch">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="mobile-user-info">
+            <div class="avatar" id="mobileUserAvatar"></div>
+            <div>
+                <p class="mobile-user-name" id="mobileUserName">Loading...</p>
+                <p class="mobile-user-email" id="mobileUserEmail">Loading...</p>
+            </div>
+        </div>
+        <nav class="mobile-nav">
+            <a href="#" class="mobile-nav-link active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-fire"></i>
+                <span>Trending</span>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-video"></i>
+                <span>My Videos</span>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-heart"></i>
+                <span>Liked</span>
+            </a>
+            <div class="mobile-nav-divider"></div>
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+            <a href="#" class="mobile-nav-link" id="mobileLogoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- All Videos Section -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">All Videos</h2>
+                    <div class="section-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="recent">Recent</button>
+                        <button class="filter-btn" data-filter="popular">Popular</button>
+                    </div>
+                </div>
+                <div class="video-grid" id="videosGrid">
+                    <!-- Loading skeleton -->
+                    <div class="loading-skeleton">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <i class="fas fa-video-slash"></i>
+                    <h3>No videos found</h3>
+                    <p>Be the first to upload a video!</p>
+                    <button class="btn btn-primary" id="uploadFromEmpty">
+                        <i class="fas fa-upload"></i>
+                        Upload Video
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Upload Modal -->
+    <div class="modal" id="uploadModal">
+        <div class="modal-content upload-modal-content">
+            <div class="modal-header">
+                <h3>Upload Video</h3>
+                <button class="close-modal" id="closeUploadModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="uploadForm" class="upload-form">
+                <div class="form-group">
+                    <label for="videoTitle">Title</label>
+                    <input type="text" id="videoTitle" name="title" required placeholder="Enter video title">
+                </div>
+                <div class="form-group">
+                    <label for="videoDescription">Description</label>
+                    <textarea id="videoDescription" name="description" rows="4" placeholder="Describe your video"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Video File</label>
+                    <div class="file-upload" id="videoFileUpload">
+                        <input type="file" id="videoFile" name="video" accept="video/*" required hidden>
+                        <div class="file-upload-placeholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to select video or drag and drop</p>
+                            <span>MP4, WebM, or AVI (Max 100MB)</span>
+                        </div>
+                        <div class="file-upload-preview" style="display: none;">
+                            <i class="fas fa-file-video"></i>
+                            <span class="file-name"></span>
+                            <button type="button" class="remove-file">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Thumbnail (Optional)</label>
+                    <div class="file-upload" id="thumbnailFileUpload">
+                        <input type="file" id="thumbnailFile" name="thumbnail" accept="image/*" hidden>
+                        <div class="file-upload-placeholder">
+                            <i class="fas fa-image"></i>
+                            <p>Click to select thumbnail</p>
+                            <span>JPG, PNG (Recommended: 1280x720)</span>
+                        </div>
+                        <div class="file-upload-preview" style="display: none;">
+                            <img src="" alt="Thumbnail preview">
+                            <button type="button" class="remove-file">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="upload-progress" id="uploadProgress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">Uploading... 0%</p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelUpload">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submitUpload">
+                        <i class="fas fa-upload"></i>
+                        Upload Video
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content video-modal-content">
+            <button class="close-modal" id="closeVideoModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="video-player-wrapper">
+                <video id="videoPlayer" class="video-player" controls>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-details">
+                <div class="video-info-section">
+                    <h2 id="videoTitle"></h2>
+                    <div class="video-stats">
+                        <span id="videoViews"><i class="fas fa-eye"></i> 0 views</span>
+                        <span id="videoDate"><i class="fas fa-calendar"></i> Today</span>
+                    </div>
+                </div>
+                <div class="video-actions-section">
+                    <button class="action-btn" id="likeBtn">
+                        <i class="far fa-thumbs-up"></i>
+                        <span id="likeCount">0</span>
+                    </button>
+                    <button class="action-btn" id="shareBtn">
+                        <i class="fas fa-share"></i>
+                        <span>Share</span>
+                    </button>
+                </div>
+                <div class="video-uploader">
+                    <div class="avatar" id="uploaderAvatar"></div>
+                    <div class="uploader-info">
+                        <p class="uploader-name" id="uploaderName">Loading...</p>
+                        <p class="uploader-date" id="uploaderDate">Uploaded today</p>
+                    </div>
+                </div>
+                <div class="video-description">
+                    <p id="videoDescription"></p>
+                </div>
+                <div class="video-comments">
+                    <h3>Comments <span id="commentCount">(0)</span></h3>
+                    <div class="comment-form">
+                        <div class="avatar" id="commentAvatar"></div>
+                        <form id="commentForm">
+                            <input type="text" id="commentInput" placeholder="Add a comment..." required>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fas fa-paper-plane"></i>
+                                Post
+                            </button>
+                        </form>
+                    </div>
+                    <div class="comments-list" id="commentsList">
+                        <!-- Comments will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
