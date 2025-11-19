@@ -398,7 +398,7 @@ function displayComments(comments) {
    Upload Functionality
    =================================== */
 async function handleUpload(event) {
-    event.preventDefault();
+    event.preventDefault(); // ⭐ ADD THIS LINE
 
     const formData = new FormData(elements.uploadForm);
     const videoFile = formData.get('video');
@@ -897,13 +897,10 @@ function initializeEventListeners() {
         }
     });
 
+    // Upload Form - CHANGE TO USE handleUpload FUNCTION
     if (elements.uploadForm) {
-        elements.uploadForm.addEventListener('submit', handleUpload);
+        elements.uploadForm.addEventListener('submit', handleUpload); // ⭐ FIX THIS
     }
-
-    // File Uploads
-    setupFileUpload('videoFileUpload', 'videoFile', false);
-    setupFileUpload('thumbnailFileUpload', 'thumbnailFile', true);
 
     // Video Modal
     if (elements.closeVideoModal) {
@@ -991,6 +988,10 @@ function initializeEventListeners() {
             setTimeout(() => elements.searchInput?.focus(), 300);
         }
     });
+
+    // Initialize file uploads - ADD THIS AT THE END
+    setupFileUpload('videoFileUpload', 'videoFile', false);
+    setupFileUpload('thumbnailFileUpload', 'thumbnailFile', true);
 
     console.log('✅ Event listeners initialized');
 }
