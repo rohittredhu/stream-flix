@@ -16,17 +16,15 @@
                     <i class="fas fa-play-circle"></i>
                     <h1>StreamFlix</h1>
                 </div>
-                <nav class="nav">
-                    <a href="#" class="nav-link active">Home</a>
-                    <a href="#" class="nav-link">Trending</a>
-                    <a href="#" class="nav-link">Library</a>
-                </nav>
+                <!-- Search Bar in Center -->
+                <div class="header-search">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Search videos, creators..." id="searchInput">
+                </div>
                 <div class="header-actions">
-                    <button class="icon-button" id="searchBtn">
-                        <i class="fas fa-search"></i>
-                    </button>
                     <button class="icon-button" id="uploadBtn">
                         <i class="fas fa-upload"></i>
+                        <label style="font-size: 20px;">Upload</label>
                     </button>
                     <div class="user-menu" id="userMenu">
                         <button class="user-profile" id="userProfileBtn">
@@ -70,17 +68,6 @@
                         <span></span>
                     </button>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Search Overlay -->
-        <div class="search-overlay" id="searchOverlay">
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" placeholder="Search videos, creators..." id="searchInput">
-                <button class="close-search" id="closeSearch">
-                    <i class="fas fa-times"></i>
-                </button>
             </div>
         </div>
     </header>
