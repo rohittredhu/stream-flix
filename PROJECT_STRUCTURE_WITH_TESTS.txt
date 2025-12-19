@@ -1,0 +1,143 @@
+Video-streaming/
+├── .github/
+│   └── workflows/
+│       └── test.yml                          ⭐ CI/CD workflow for automated testing
+│
+├── client/                                   (Frontend - not covered in this setup)
+│   ├── api.js
+│   ├── auth.js
+│   ├── index.html
+│   └── ...
+│
+├── server/                                   🎯 Main testing focus
+│   ├── __tests__/                           ⭐ All test files here
+│   │   ├── setup.js                         ⭐ Global test configuration & mocks
+│   │   │
+│   │   ├── mocks/                           📦 Mock data and helpers
+│   │   │   └── prisma.mock.js              ⭐ Reusable mock data
+│   │   │
+│   │   ├── unit/                           🧪 Unit tests (isolated components)
+│   │   │   ├── controllers/
+│   │   │   │   ├── authController.test.js   ✅ 9 tests
+│   │   │   │   ├── videoController.test.js  ✅ 8 tests
+│   │   │   │   └── userController.test.js   ✅ 7 tests
+│   │   │   │
+│   │   │   ├── services/
+│   │   │   │   ├── video.service.test.js    ✅ 9 tests
+│   │   │   │   ├── cache.service.test.js    ✅ 8 tests
+│   │   │   │   ├── cloudinary.service.test.js ✅ 6 tests
+│   │   │   │   └── queue.service.test.js    ✅ 4 tests
+│   │   │   │
+│   │   │   ├── middleware/
+│   │   │   │   ├── auth.middleware.test.js  ✅ 6 tests
+│   │   │   │   └── error.middleware.test.js ✅ 5 tests
+│   │   │   │
+│   │   │   ├── utils/
+│   │   │   │   └── helpers.test.js          ✅ 15 tests
+│   │   │   │
+│   │   │   └── websockets/
+│   │   │       ├── chat.handler.test.js     ✅ 4 tests
+│   │   │       └── engagement.handler.test.js ✅ 3 tests
+│   │   │
+│   │   └── integration/                     🔗 Integration tests (full API)
+│   │       ├── auth.integration.test.js     ✅ 4 tests
+│   │       ├── video.integration.test.js    ✅ 8 tests
+│   │       └── user.integration.test.js     ✅ 7 tests
+│   │
+│   ├── config/                              (Production code)
+│   │   ├── cloudinary.js
+│   │   ├── database.js
+│   │   ├── redis.js
+│   │   └── websocket.js
+│   │
+│   ├── controllers/                         (Tested by unit tests)
+│   │   ├── authController.js
+│   │   ├── userController.js
+│   │   └── videoController.js
+│   │
+│   ├── middleware/                          (Tested by unit tests)
+│   │   ├── auth.middleware.js
+│   │   ├── error.middleware.js
+│   │   └── upload.middleware.js
+│   │
+│   ├── services/                            (Tested by unit tests)
+│   │   ├── cache.service.js
+│   │   ├── cloudinary.service.js
+│   │   ├── pubsub.service.js
+│   │   ├── queue.service.js
+│   │   └── video.service.js
+│   │
+│   ├── websockets/                          (Tested by unit tests)
+│   │   ├── index.js
+│   │   └── handlers/
+│   │       ├── chat.handler.js
+│   │       ├── engagement.handler.js
+│   │       └── stream.handler.js
+│   │
+│   ├── utils/                               (Tested by unit tests)
+│   │   └── helpers.js
+│   │
+│   ├── routes/                              (Tested by integration tests)
+│   │   ├── authRoutes.js
+│   │   ├── userRoutes.js
+│   │   └── videoRoutes.js
+│   │
+│   ├── coverage/                            📊 Generated after running tests
+│   │   └── lcov-report/
+│   │       └── index.html                   📈 Coverage report (open in browser)
+│   │
+│   ├── .env.test                            ⭐ Test environment variables
+│   ├── .gitignore                           ⭐ Updated with test ignores
+│   ├── jest.config.js                       ⭐ Jest configuration
+│   ├── package.json                         ⭐ Updated with test scripts
+│   │
+│   ├── TESTING.md                           📖 Complete testing guide
+│   ├── JEST_QUICK_REFERENCE.md             📖 Quick reference for Jest
+│   ├── TEST_COMMANDS.md                     📖 Command examples
+│   └── TEST_SETUP_COMPLETE.md              📖 Implementation summary
+│
+└── README_TESTING.md                        📖 Testing setup overview
+
+═══════════════════════════════════════════════════════════════════
+
+LEGEND:
+⭐ = New testing files created
+✅ = Test file with number of tests
+🧪 = Unit test directory
+🔗 = Integration test directory
+📦 = Mocks and test data
+📖 = Documentation
+📊 = Generated reports
+📈 = HTML coverage report
+🎯 = Main testing focus area
+
+═══════════════════════════════════════════════════════════════════
+
+TEST COVERAGE:
+├── Controllers    ✅ 24 tests  (Auth, Video, User)
+├── Services       ✅ 27 tests  (Video, Cache, Cloudinary, Queue)
+├── Middleware     ✅ 11 tests  (Auth, Error)
+├── Utilities      ✅ 15 tests  (Helpers)
+├── WebSockets     ✅ 7 tests   (Chat, Engagement)
+└── Integration    ✅ 19 tests  (Auth, Video, User APIs)
+
+TOTAL: 103+ comprehensive tests
+
+═══════════════════════════════════════════════════════════════════
+
+QUICK START:
+1. cd server
+2. npm install          (already done)
+3. npm test            (run all tests)
+4. Open coverage/lcov-report/index.html to view coverage
+
+═══════════════════════════════════════════════════════════════════
+
+COMMANDS:
+npm test                    # Run all tests with coverage
+npm run test:watch         # Watch mode for development
+npm run test:unit          # Run only unit tests
+npm run test:integration   # Run only integration tests
+npm run test:ci            # CI/CD optimized run
+
+═══════════════════════════════════════════════════════════════════
